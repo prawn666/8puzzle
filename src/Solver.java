@@ -10,6 +10,7 @@ public class Solver {
     private class Node {
         private final Board curr;
         private final Node prev;
+        private final int manhattan;
         private final int stepCount;
 
         public Node(Board curr, Node prev) {
@@ -20,6 +21,7 @@ public class Solver {
             } else {
                 this.stepCount = 0;
             }
+            this.manhattan = curr.manhattan() + stepCount;
         }
     }
 
@@ -34,7 +36,7 @@ public class Solver {
         Comparator<Node> comparator = new Comparator<>() {
             @Override
             public int compare(Node o1, Node o2) {
-                return o1.curr.manhattan() + o1.stepCount - o2.curr.manhattan() - o2.stepCount;
+                return o1.manhattan - o2.manhattan;
             }
         };
 
